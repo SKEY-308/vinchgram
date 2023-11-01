@@ -38,7 +38,7 @@ const SignupForm = () => {
         <Form {...form}>
 
             <div className="sm:w-420 flex-center flex-col">
-                <img src="/assets/images/logo.svg" alt="logo" />
+                <img className="pb-4" src="/assets/images/logo.svg" alt="logo" />
 
                 <h2 className="h3-bold md:h2-bold">Create a new account</h2>
             </div>
