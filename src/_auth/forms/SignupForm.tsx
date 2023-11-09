@@ -27,9 +27,9 @@ const SignupForm = () => {
     const navigate = useNavigate();
 
     // const isLoading = false;
-    const { mutateAsync: createUserAccount, isLoading: isCreatingUser } = useCreateUserAccount();
+    const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
 
-    const { mutateAsync: signInAccount, isLoading: isSigningIn } = useSignInAccount();
+    const { mutateAsync: signInAccount, isPending: isSigningIn } = useSignInAccount();
 
 
     // 1. Define your form.
@@ -71,6 +71,7 @@ const SignupForm = () => {
 
         if (isLoggedIn) {
             form.reset();
+
             navigate('/')
         } else {
             return toast({ title: "Sign up failed. Please try again.", })
@@ -144,7 +145,7 @@ const SignupForm = () => {
                         )}
                     />
                     <Button type="submit" className="shad-button_primary">
-                        {isCreatingUser ? (
+                        {isCreatingAccount ? (
                             <div className="flex-center gap-2"> <Loader /> Loading ....</div>
                         ) : 'Sign up'}
                     </Button>
