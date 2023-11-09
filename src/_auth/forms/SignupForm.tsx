@@ -1,5 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
+import { useToast } from "@/components/ui/use-toast"
+
 
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
@@ -18,6 +20,7 @@ import { createUserAccount } from "@/lib/appwrite/api"
 
 
 const SignupForm = () => {
+    const { toast } = useToast()
 
     const isLoading = false;
 
@@ -32,14 +35,20 @@ const SignupForm = () => {
         },
     })
 
+    const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccountMutation();
+
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof SignupValidation>) {
         // Create the user
         const newUser = await createUserAccount(values);
 
         if (!newUser) {
-            return
+            return toast({
+                title: "Sign up failed. Please try again.",
+            })
         }
+
+        // const session = await signInAccount()
         // console.log(newUser)
     }
 
