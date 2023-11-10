@@ -38,7 +38,7 @@ const LeftSidebar = () => {
 
                 {isLoading || !user.email ? (
                     <div className="h-14">
-                        <Loader />
+                        {/* <Loader /> */}
                     </div>
                 ) : (
                     <Link to={`/profile/${user.id}`} className="flex gap-3 items-center">
