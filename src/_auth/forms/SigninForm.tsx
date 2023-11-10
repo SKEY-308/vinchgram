@@ -29,7 +29,7 @@ const SigninForm = () => {
     // const isLoading = false;
     // const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
 
-    const { mutateAsync: signInAccount, isPending } = useSignInAccount();
+    const { mutateAsync: signInAccount } = useSignInAccount();
 
 
     // 1. Define your form.
@@ -46,11 +46,14 @@ const SigninForm = () => {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof SigninValidation>) {
+        console.log('We are here')
 
         const session = await signInAccount({
             email: values.email,
             password: values.password,
         })
+
+        console.log({ session })
 
         if (!session) {
             return toast({
@@ -59,11 +62,11 @@ const SigninForm = () => {
         }
 
         const isLoggedIn = await checkAuthUser();
-
+        console.log({ isLoggedIn })
 
         if (isLoggedIn) {
             form.reset();
-
+            console.log('NAVIGATING')
             navigate('/')
         } else {
             return toast({ title: "Sign up failed. Please try again.", })
@@ -84,32 +87,7 @@ const SigninForm = () => {
 
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
-                    {/* <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input type="text" className="shad-input" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input type="text" className="shad-input" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    /> */}
+
                     <FormField
                         control={form.control}
                         name="email"
