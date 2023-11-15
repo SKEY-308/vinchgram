@@ -51,7 +51,7 @@ const Home = () => {
                     <ul className="grid 2xl:grid-cols-2 gap-6">
                         {creators?.documents.map((creator) => (
                             <li key={creator?.$id}>
-                                <UserCard user={creator} />
+                                {/* <UserCard user={creator} /> */}
                             </li>
                         ))}
                     </ul>
