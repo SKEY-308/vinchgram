@@ -31,7 +31,7 @@ const PostForm = ({ post, }: PostFormProps) => {
     });
 
     // Query
-    const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost();
+    const { mutateAsync: createPost, } = useCreatePost();
     // const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost();
 
     // Handler
@@ -65,6 +65,7 @@ const PostForm = ({ post, }: PostFormProps) => {
             });
         }
         navigate("/");
+        console.log('Posted whith sucess')
     };
 
     return (
@@ -149,7 +150,7 @@ const PostForm = ({ post, }: PostFormProps) => {
                         Cancel
                     </Button>
                     <Button type="submit" className="shad-button_primary whitespace-nowrap">
-                        Submit
+                        Post
                     </Button>
                 </div>
             </form>
