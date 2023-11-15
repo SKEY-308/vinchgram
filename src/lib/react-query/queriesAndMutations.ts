@@ -9,6 +9,7 @@ import {
   createPost,
   createUserAccount,
   getRecentPosts,
+  getUsers,
   signInAccount,
   signOutAccount,
 } from "../appwrite/api";
@@ -17,6 +18,13 @@ export const useGetRecentPosts = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
     queryFn: getRecentPosts,
+  });
+};
+
+export const useGetUsers = (limit?: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
   });
 };
 
