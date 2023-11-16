@@ -32,6 +32,11 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         (record: Models.Document) => record.post.$id === post.$id
     );
 
+    // Ou
+    // useEffect(() => {
+    //     setIsSaved(savedPostRecord ? true : false);
+    // }, [currentUser]);
+
     useEffect(() => {
         setIsSaved(!!savedPostRecord);
     }, [currentUser]);
@@ -53,8 +58,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
         likePost({ postId: post.$id, likesArray });
     };
 
-    const handleSavePost = (
-        e: React.MouseEvent<HTMLImageElement, MouseEvent>
+    const handleSavePost = (e: React.MouseEvent<HTMLImageElement, MouseEvent>
     ) => {
         e.stopPropagation();
 
