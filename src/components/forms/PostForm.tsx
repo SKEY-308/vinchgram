@@ -150,7 +150,7 @@ const PostForm = ({ post, }: PostFormProps) => {
                         Cancel
                     </Button>
                     <Button type="submit" className="shad-button_primary whitespace-nowrap">
-                        Post
+                        Submit
                     </Button>
                 </div>
             </form>
