@@ -16,10 +16,11 @@ type PostFormProps = {
     action: "Create" | "Update";
 };
 
-const PostForm = ({ post, }: PostFormProps) => {
+const PostForm = ({ post, action }: PostFormProps) => {
     const navigate = useNavigate();
     const { toast } = useToast()
     const { user } = useUserContext();
+
     const form = useForm<z.infer<typeof PostValidation>>({
         resolver: zodResolver(PostValidation),
         defaultValues: {
@@ -32,26 +33,26 @@ const PostForm = ({ post, }: PostFormProps) => {
 
     // Query
     const { mutateAsync: createPost, } = useCreatePost();
-    // const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost();
+    const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost();
 
     // Handler
     const handleSubmit = async (value: z.infer<typeof PostValidation>) => {
         // ACTION = UPDATE
-        // if (post && action === "Update") {
-        //     const updatedPost = await updatePost({
-        //         ...value,
-        //         postId: post.$id,
-        //         imageId: post.imageId,
-        //         imageUrl: post.imageUrl,
-        //     });
+        if (post && action === "Update") {
+            const updatedPost = await updatePost({
+                ...value,
+                postId: post.$id,
+                imageId: post.imageId,
+                imageUrl: post.imageUrl,
+            });
 
-        //     if (!updatedPost) {
-        //         toast({
-        //             title: `${action} post failed. Please try again.`,
-        //         });
-        //     }
-        //     return navigate(`/posts/${post.$id}`);
-        // }
+            if (!updatedPost) {
+                toast({
+                    title: `${action} post failed. Please try again.`,
+                });
+            }
+            return navigate(`/posts/${post.$id}`);
+        }
 
         // ACTION = CREATE
         const newPost = await createPost({
@@ -67,6 +68,8 @@ const PostForm = ({ post, }: PostFormProps) => {
         navigate("/");
         console.log('Posted whith sucess')
     };
+
+    console.log(post?.imageUrl)
 
     return (
         <Form {...form}>
