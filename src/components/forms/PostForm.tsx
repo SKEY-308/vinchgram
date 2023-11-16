@@ -32,7 +32,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
     });
 
     // Query
-    const { mutateAsync: createPost, } = useCreatePost();
+    const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost();
     const { mutateAsync: updatePost, isPending: isLoadingUpdate } = useUpdatePost();
 
     // Handler
